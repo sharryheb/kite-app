@@ -19,10 +19,9 @@ function createMap(position) {
       zoom: 12
     })
   });
-  
-  console.log(map);
 }
 
+var parks;
 
 if ('geolocation' in navigator)
   navigator.geolocation.getCurrentPosition(createMap, createMap);
