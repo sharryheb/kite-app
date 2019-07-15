@@ -1,3 +1,71 @@
-#map {
-    height: 100%;
+header
+{
+    background-image: url("../images/banner-crop.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+input
+{
+    margin: 0 !important;
+}
+
+label
+{
+    transform: translateY(-16px) scale(1) !important;
+}
+
+.rangeLabel
+{
+    transform: unset !important;
+}
+
+#pageTitle
+{
+    display: flex;
+    align-items: flex-end;
+    min-height: 30vh;
+    margin-bottom: 1rem;
+}
+
+#kiteClub
+{
+    margin: .8rem auto auto 8rem;
+    font-family: 'Luckiest Guy', cursive;
+    color: beige;
+}
+
+#flyAKite
+{
+    margin: 0 1rem .5rem auto;
+    font-style: italic;
+    font-weight: bolder;
+    font-family: 'Architects Daughter', cursive;
+}
+
+.inputSlider
+{
+    border: none !important;
+}
+
+#search
+{
+    margin-top: 1rem;
+}
+
+canvas 
+{
+    border: 1px solid black;
+}
+
+#map
+{
+    height: 70vh;
+}
+
+#locationList
+{
+    height: 70vh;
+    border: 1px solid black;
 }
