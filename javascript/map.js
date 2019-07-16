@@ -1,7 +1,7 @@
 
 var map;
 var vectorSource;
-var parks;
+var parks = [];
 
 var iconStyle = new ol.style.Style({
   image: new ol.style.Icon(/** @type {olx.style.IconOptions} */({
@@ -62,8 +62,8 @@ function createMap(position) {
         console.log(venues[i]);
         parks.push({
           name: venues[i].name,
-          lat: venues[i].location.latitude,
-          long: venues[i].location.longitude
+          lat: venues[i].location.lat,
+          long: venues[i].location.lng
         });
       }
     })
