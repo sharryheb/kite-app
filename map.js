@@ -74,7 +74,7 @@ function addMapMarker(lonLat) {
   vectorSource.addFeature(marker);
 }
 
-function addMapMarkers(places) {
+function markPlaces(places) {
   for (var i = 0; i < places.length; ++i) {
     addMapMarker([places[i].long, places[i].lat]);
   }
