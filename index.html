@@ -5,22 +5,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Kite Map</title>
+    <title>Kite Club</title>
     
+<<<<<<< HEAD
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+=======
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Architects+Daughter&display=swap" rel="stylesheet">
+>>>>>>> 48d67f5ad086693a72f8fc5f4deb74a0c4a4e8db
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-    <link type="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/nouislider.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
+<<<<<<< HEAD
     <div id="map" class="map"></div>
     <script type="text/javascript" src="ui.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="weather.js"></script>
+=======
+    <header id="pageTitle" class="white-text">
+        <h1 id="kiteClub">K i t e &nbsp; C l u b</h1><h4 id="flyAKite">Let's Go Fly a Kite!</h4>
+    </header>
+
+    <div class="container" id="inputScreen">
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s5">
+                        <input placeholder="Address" id="address" type="text" class="validate">
+                        <label for="address">Where do you want to fly?</label>
+                    </div>
+                    <div class="col s2"></div>
+                    <div class="input-field col s5">
+                        <label>When do you want to fly?</label>
+                        <input id="datetimepicker" type="text" placeholder="Click to Open Calendar"></input>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s5">
+                        <input class="inputSlider"><div id="radiusSlider"></div></input>
+                        <label class="rangeLabel">Within this Radius: <span id="curRadius"></span></label>
+                    </div>
+                    <div class="col s2"></div>
+                    <div class="input-field col s5">
+                        <input class="inputSlider"><div id="windSlider"></div></input>
+                        <label class="rangeLabel">Min and Max Wind Speed: <span id="curWind"></span></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 center">
+                        <a id="search" class="waves-effect waves-light btn">Tell Me Where to Go!</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="hide" id="results">
+        <div class="row">
+            <div class="col s8">
+                <h4 id="mapResultsTag">You Should Go Here:  </h4>
+                <div id="map" class="map"></div>
+            </div>
+            <div class="col s4">
+                <div>
+                    <h4>List: <a id="redoSearch" class="waves-effect waves-light btn-small right">Start Over</a></h4>
+                </div>
+                <div id="locationList">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="javascript/jquery.datetimepicker.full.min.js"></script>
+    <script src="javascript/nouislider.min.js"></script>
+
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="javascript/ui.js"></script>
+    <script type="text/javascript" src="javascript/app.js"></script>
+    
+>>>>>>> 48d67f5ad086693a72f8fc5f4deb74a0c4a4e8db
 </body>
 
 </html>
