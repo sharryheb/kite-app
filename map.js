@@ -1,8 +1,18 @@
 
 
 var map;
-var markers;
+var vectorSource;
 var parks;
+
+var iconStyle = new ol.style.Style({
+  image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+    anchor: [37, 40],
+    anchorXUnits: 'pixels',
+    anchorYUnits: 'pixels',
+    opacity: 1.0,
+    src: 'kite-icon.png'
+  }))
+});
 
 function createMap(position) {
   // Create the map with given position from geopositioning.
@@ -25,7 +35,7 @@ function createMap(position) {
       zoom: 12
     })
   });
-  marker = new ol.Feature({
+  var marker = new ol.Feature({
     geometry: new ol.geom.Point(
       ol.proj.fromLonLat(lonLat)
     )
@@ -33,7 +43,7 @@ function createMap(position) {
   vectorSource = new ol.source.Vector({
     features: [marker]
   });
-  markerVectorLayer = new ol.layer.Vector({
+  var markerVectorLayer = new ol.layer.Vector({
     source: vectorSource,
   });
   map.addLayer(markerVectorLayer);
@@ -60,7 +70,14 @@ function addMapMarker(lonLat) {
       ol.proj.fromLonLat(lonLat)
     )
   });
-  vectorSource.addFeatures(marker);
+  marker.setStyle(iconStyle);
+  vectorSource.addFeature(marker);
+}
+
+function addMapMarkers(places) {
+  for (var i = 0; i < places.length; ++i) {
+    addMapMarker([places[i].long, places[i].lat]);
+  }
 }
 
 
