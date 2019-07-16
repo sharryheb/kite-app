@@ -11,9 +11,9 @@ place object format:
 var weather = {
 
     //takes a place object and makes an API call for weather data on the object's latitude and longitude, returns a promise to resolve when the data comes back
-    getWeather: function (place) {
-        var key = '44d4a55b5025e5a21a8ab11202df6b6c';
-        var url = `https://api.darksky.net/forecast/${key}/${place.lat},${place.long}`;
+    getWeather: function (place,time) {
+        const key = '44d4a55b5025e5a21a8ab11202df6b6c';
+        let url = `https://api.darksky.net/forecast/${key}/${place.lat},${place.long},${time}?exclude=flags,minutely,hourly,daily`;
 
         return $.ajax({
             url:url,
@@ -23,15 +23,19 @@ var weather = {
     },
 
     //takes an array of place objects, a minimum wind speed, a maximum wind speed, then renders all the places meeting criteria on the map
-    topSpots: function(places,min,max) {
+    topSpots: function(places,min,max,time) {
 
         //make an arrat of promises
-        let requests = places.map(this.getWeather);
+        let requests = [];//places.map(this.getWeather);
+        for (let i = 0; i < places.length;i++) {
+            requests.push(this.getWeather(places[i],time));
+        }
+
 
         //once all API calls are back, parse their data into our place objects
         Promise.all(requests)
             .then(responses => {
-                var bestPlaces = [];
+                let bestPlaces = [];
                 for (let i =0; i < responses.length; i++) {
                     let p = places[i];
                     let r = responses[i];
@@ -50,6 +54,7 @@ var weather = {
                 
                 //create map pins for all matching places
                 markPlaces(bestPlaces);
+                //TODO: call function to populate text list of places, or do it here
             });
 
 
