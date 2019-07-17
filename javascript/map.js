@@ -5,7 +5,7 @@ var parks = [];
 
 var iconStyle = new ol.style.Style({
   image: new ol.style.Icon(/** @type {olx.style.IconOptions} */({
-    anchor: [37, 40],
+    anchor: [55, 49],
     anchorXUnits: 'pixels',
     anchorYUnits: 'pixels',
     opacity: 1.0,
@@ -22,18 +22,6 @@ function createMap(position) {
   } else {
     lonLat = [-122.190933, 47.613701];
   }
-  map = new ol.Map({
-    target: 'map',
-    layers: [
-      new ol.layer.Tile({
-        source: new ol.source.OSM()
-      })
-    ],
-    view: new ol.View({
-      center: ol.proj.fromLonLat(lonLat),
-      zoom: 12
-    })
-  });
   var marker = new ol.Feature({
     geometry: new ol.geom.Point(
       ol.proj.fromLonLat(lonLat)
@@ -42,10 +30,21 @@ function createMap(position) {
   vectorSource = new ol.source.Vector({
     features: [marker]
   });
-  var markerVectorLayer = new ol.layer.Vector({
-    source: vectorSource,
+  map = new ol.Map({
+    target: 'map',
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM()
+      }),
+      new ol.layer.Vector({
+        source: vectorSource
+      })
+    ],
+    view: new ol.View({
+      center: ol.proj.fromLonLat(lonLat),
+      zoom: 12
+    })
   });
-  map.addLayer(markerVectorLayer);
 
 
 
@@ -59,7 +58,6 @@ function createMap(position) {
       // Code for handling API response
       var venues = response.response.venues;
       for (var i = 0; i < venues.length; ++i) {
-        console.log(venues[i]);
         parks.push({
           name: venues[i].name,
           lat: venues[i].location.lat,
