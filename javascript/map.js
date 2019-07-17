@@ -38,19 +38,22 @@ function createMap(position) {
   });
   map.addLayer(markerVectorLayer);
 
+//ll=40.7243,-74.0018
   fetch('https://api.foursquare.com/v2/venues/explore?client_id='
     + fourSquare.clientId + '&client_secret=' + fourSquare.clientSecret +
-    '&v=20180323&limit=1&ll=40.7243,-74.0018&query=coffee')
+    '&v=20190715&radius=' + requestRadius * 1609.344 + '&limit=10&ll=' + position.coords.latitude + ',' + position.coords.longitude + '&query=parks')
     .then(function (response) {
-      // Code for handling API response
-      console.log(response);
+      response.json()
+      .then(function(parsedJson){
+          locationResults = parsedJson.response.groups[0].items;
+      });
     })
+    
     .catch(function (error) {
       // Code for handling errors
       console.log(error);
     });
 }
-
 
 
 function addMapMarker(lonLat) {
@@ -62,13 +65,3 @@ function addMapMarker(lonLat) {
   });
   vectorSource.addFeatures(marker);
 }
-
-
-
-if ('geolocation' in navigator)
-  navigator.geolocation.getCurrentPosition(createMap, createMap);
-else
-  createMap();
-
-
-

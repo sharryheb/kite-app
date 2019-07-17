@@ -10,41 +10,52 @@
     <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Architects+Daughter&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="css/nouislider.min.css">
     <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
-    <header id="pageTitle" class="white-text">
-        <h1 id="kiteClub">K i t e &nbsp; C l u b</h1><h4 id="flyAKite">Let's Go Fly a Kite!</h4>
+    <header id="pageTitle">
+        <h1 id="kiteClub">Kite&nbsp;Club</h1><h4 id="flyAKite">Let's Go Fly a Kite!</h4>
     </header>
 
     <div class="container" id="inputScreen">
         <div class="row">
             <form class="col s12">
                 <div class="row">
-                    <div class="input-field col s5">
-                        <input placeholder="Address" id="address" type="text" class="validate">
+                    <div class="input-field col s7">
+                        <input placeholder="Address" id="address" type="text" class="validate"></input>
                         <label for="address">Where do you want to fly?</label>
                     </div>
-                    <div class="col s2"></div>
-                    <div class="input-field col s5">
+                    <div class="col s1"></div>
+                    <div class="input-field col s4">
                         <label>When do you want to fly?</label>
                         <input id="datetimepicker" type="text" placeholder="Click to Open Calendar"></input>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="input-field col s5">
+                    <div class="input-field col s7">
+                        <label class="rangeLabel">Min and Max Wind Speed: <span id="curWind"></span></label>
+                        <input class="inputSlider"><div id="windSlider"></div></input>
+                    </div>
+                    <div class="col s1"></div>
+                    <div class="input-field col s4">
                         <input class="inputSlider"><div id="radiusSlider"></div></input>
                         <label class="rangeLabel">Within this Radius: <span id="curRadius"></span></label>
                     </div>
-                    <div class="col s2"></div>
-                    <div class="input-field col s5">
-                        <input class="inputSlider"><div id="windSlider"></div></input>
-                        <label class="rangeLabel">Min and Max Wind Speed: <span id="curWind"></span></label>
+                </div>
+                <div class="row" id="ignoreMaxWindLabel">
+                    <div class="col s7">
+                        <label for="ignoreMaxWind">
+                            <input id="ignoreMaxWind" type="checkbox" class="filled-in"/>
+                            <span>Ignore Max Wind Speed</span>
+                        </label>
+                    </div>
+                    <div class="col s5">
+                        
                     </div>
                 </div>
 
@@ -57,7 +68,7 @@
         </div>
     </div>
 
-    <div class="hide" id="results">
+    <div class="container hide" id="results">
         <div class="row">
             <div class="col s8">
                 <h4 id="mapResultsTag">You Should Go Here:  </h4>
@@ -67,7 +78,8 @@
                 <div>
                     <h4>List: <a id="redoSearch" class="waves-effect waves-light btn-small right">Start Over</a></h4>
                 </div>
-                <div id="locationList">
+                <div id="locationList" class="collection">
+                    
                 </div>
             </div>
         </div>
@@ -79,9 +91,9 @@
 
     <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script type="text/javascript" src="javascript/ui.js"></script>
     <script type="text/javascript" src="javascript/secrets.js"></script>
     <script type="text/javascript" src="javascript/map.js"></script>
+    <script type="text/javascript" src="javascript/ui.js"></script>
     
 </body>
 

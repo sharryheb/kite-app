@@ -1,9 +1,9 @@
 header
 {
-    background-image: url("../images/banner-crop.jpg");
+    background-image: url("../images/header-kite-flying.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position-x: right;
 }
 
 input
@@ -25,28 +25,37 @@ label
 {
     display: flex;
     align-items: flex-end;
-    min-height: 30vh;
     margin-bottom: 1rem;
+    border-bottom: 1px solid darkslategray;
 }
 
 #kiteClub
 {
-    margin: .8rem auto auto 8rem;
+    margin: auto;
+    margin-top: .8rem;
+    margin-left: 2rem;
     font-family: 'Luckiest Guy', cursive;
-    color: beige;
+    color: darkslategray;
+    font-size: 90px;
 }
 
 #flyAKite
 {
-    margin: 0 1rem .5rem auto;
+    margin: 0 2rem .5rem auto;
     font-style: italic;
     font-weight: bolder;
     font-family: 'Architects Daughter', cursive;
+    color: darkslategray;
 }
 
 .inputSlider
 {
     border: none !important;
+}
+
+#ignoreMaxWindLabel
+{
+    margin-top: 3rem !important;
 }
 
 #search
