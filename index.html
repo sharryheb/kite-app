@@ -26,8 +26,9 @@
             <form class="col s12">
                 <div class="row">
                     <div class="input-field col s7">
-                        <input placeholder="Address" id="address" type="text" class="validate"></input>
+                        <input placeholder="Address" id="address" type="text" data-error="Please enter an address" name="address" class="validate" required="required" aria-required="true"></input>
                         <label for="address">Where do you want to fly?</label>
+                        <span id="validateErrorMsg" class="red-text"></span>
                     </div>
                     <div class="col s1"></div>
                     <div class="input-field col s4">
@@ -61,7 +62,7 @@
 
                 <div class="row">
                     <div class="input-field col s12 center">
-                        <a id="search" class="waves-effect waves-light btn">Tell Me Where to Go!</a>
+                        <a id="search" type="submit" class="waves-effect waves-light btn">Tell Me Where to Go!</a>
                     </div>
                 </div>
             </form>
