@@ -48,8 +48,8 @@ function createMap(position) {
 
   $.ajax({
     url: 'https://api.foursquare.com/v2/venues/search?client_id='
-      + fourSquare.clientId + '&client_secret=' + fourSquare.clientSecret +
-      '&v=20190715&limit=50&ll=' + String([lonLat[1], lonLat[0]]) + '&query=park',
+      + getSecret(fourSquare, clientId) + '&client_secret=' + getSecret(fourSquare, clientSecret) +
+      '&v=20190715&limit=30&ll=' + String([lonLat[1], lonLat[0]]) + '&query=park',
     method: 'GET'
   })
     .then(function (response) {

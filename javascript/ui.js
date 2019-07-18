@@ -213,7 +213,8 @@ function getAddressFromLatLong(position)
     if (position && position.coords) {
         positionForMap = position;
     }
-    fetch("http://www.mapquestapi.com/geocoding/v1/reverse?key=zeGKwPqmtYulJwF8gftOgbJGVaJaJrWc&location=" + position.coords.latitude + "," + position.coords.longitude)
+    fetch("http://www.mapquestapi.com/geocoding/v1/reverse?key="+ getSecret('mapQuest', 'consumerKey') +
+          "&location=" + position.coords.latitude + "," + position.coords.longitude)
     .then(function (response) {
         response.json()
         .then(function (parsedJson)
@@ -235,7 +236,8 @@ function getAddressFromLatLong(position)
 
 function getLatLongFromAddress()
 {
-    fetch("http://www.mapquestapi.com/geocoding/v1/address?key=zeGKwPqmtYulJwF8gftOgbJGVaJaJrWc&location=" + $("#address").val())
+    fetch("http://www.mapquestapi.com/geocoding/v1/address?key=" + getSecret('mapQuest', 'consumerKey') +
+          "&location=" + $("#address").val())
     .then(function (response) {
         response.json()
         .then(function (parsedJson)
