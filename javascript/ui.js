@@ -30,14 +30,14 @@ var windSpeedSlider = null;
 var radiusSlider = null;
 
 
-$(document).ready(function(){
+$(document).ready(function () {
 
     nowDateTime = roundUpToHalfHour(nowDateTime);
     $("#datetimepicker").datetimepicker({
         startDate: nowDateTime,
-        onChangeDateTime:SetRequestedDate,
+        onChangeDateTime: SetRequestedDate,
         minDate: 0,
-        format: 'm/d/Y g:i A', 
+        format: 'm/d/Y g:i A',
         formatDate: "m/d/Y",
         formatTime: "g:i A",
         value: nowDateTime,
@@ -68,10 +68,10 @@ $(document).ready(function(){
 
         format: {
             to: function (value) {
-            return parseInt(value);
+                return parseInt(value);
             },
             from: function (value) {
-            return Number(value);
+                return Number(value);
             }
         }
     });
@@ -93,34 +93,30 @@ $(document).ready(function(){
 
         format: {
             to: function (value) {
-            return parseInt(value);
+                return parseInt(value);
             },
             from: function (value) {
-            return Number(value);
+                return Number(value);
             }
         }
     });
 
-    windSpeedSlider.noUiSlider.on('end', function(values, handle)
-    {    
-        if(handle === 0)
+    windSpeedSlider.noUiSlider.on('end', function (values, handle) {
+        if (handle === 0)
             wind.speedMin = values[0];
         if (handle === 1)
             wind.speedMax = values[1];
     });
 
-    windSpeedSlider.noUiSlider.on('update', function(values)
-    {
+    windSpeedSlider.noUiSlider.on('update', function (values) {
         $("#curWind").text(values[0] + " to " + values[1] + " mph");
     });
 
-    radiusSlider.noUiSlider.on('end', function(values)
-    {
+    radiusSlider.noUiSlider.on('end', function (values) {
         requestRadius = parseInt(values[0]);
     });
 
-    radiusSlider.noUiSlider.on('update', function(values)
-    {
+    radiusSlider.noUiSlider.on('update', function (values) {
         $("#curRadius").text(values[0] + " miles");
     });
 
@@ -131,57 +127,42 @@ $(document).ready(function(){
 
 });
 
-$("#search").click(function()
-{
+$("#search").click(function () {
     $("#map").html("");
     $("#locationList").html("");
-    positionForMap = getLatLongFromAddress($("#address").val());
-    setTimeout(function(){
-        createMap(positionForMap);
-        setTimeout(function(){
-            createLocationList();
-        }, 10000);
-    }, 10000);
-    
+    getLatLongFromAddress($("#address").val());
+
     $("#inputScreen").addClass("hide");
     $("#results").removeClass("hide");
 });
 
-$("#redoSearch").click(function()
-{
-    setTimeout( function() { map.updateSize();}, 200);
+$("#redoSearch").click(function () {
+    setTimeout(function () { map.updateSize(); }, 200);
     $("#results").addClass("hide");
     $("#inputScreen").removeClass("hide");
 });
 
-$("#ignoreMaxWind").click(function() 
-{
-    if ($(event.target).attr("checked"))
-    {
+$("#ignoreMaxWind").click(function () {
+    if ($(event.target).attr("checked")) {
         $("#ignoreMaxWind").attr("checked", false);
         wind.ignoreMaxWindSpeed = false;
     }
-    else
-    {
+    else {
         $("#ignoreMaxWind").attr("checked", true);
         wind.ignoreMaxWindSpeed = true;
     }
 });
 
-function SetRequestedDate(dateString)
-{
+function SetRequestedDate(dateString) {
     requestDateTime = Math.round((new Date(dateString)).getTime() / 1000);
 };
 
-function createLocationList()
-{
-    for(var i=0; i<locationResults.length; i++)
-    {
-        var location = locationResults[i];
+function createLocationList() {
+    for (var i = 0; i < parks.length; i++) {
         var listItem = $("<a>");
         listItem.addClass("collection-item teal-text text-lighten-2");
         listItem.attr("href", "#!");
-        listItem.text(location.venue.name);
+        listItem.text(parks[i].name);
         $("#locationList").append(listItem);
     }
 }
@@ -195,47 +176,49 @@ function roundUpToHalfHour(time) {
     return timeToReturn;
 };
 
-function getAddressFromLatLong(position)
-{
+function getAddressFromLatLong(position) {
+    if (position && position.coords) {
+        createMap(position);
+    }
     fetch("http://www.mapquestapi.com/geocoding/v1/reverse?key=zeGKwPqmtYulJwF8gftOgbJGVaJaJrWc&location=" + position.coords.latitude + "," + position.coords.longitude)
-    .then(function (response) {
-        response.json()
-        .then(function (parsedJson)
-        {
-            var loc = parsedJson.results[0].locations[0];
-            geoLocatedAddress.street = loc.street;
-            geoLocatedAddress.city = loc.adminArea5;
-            geoLocatedAddress.state = loc.adminArea3;
-            geoLocatedAddress.zip = loc.postalCode;
+        .then(function (response) {
+            response.json()
+                .then(function (parsedJson) {
+                    var loc = parsedJson.results[0].locations[0];
+                    geoLocatedAddress.street = loc.street;
+                    geoLocatedAddress.city = loc.adminArea5;
+                    geoLocatedAddress.state = loc.adminArea3;
+                    geoLocatedAddress.zip = loc.postalCode;
 
-            $("#address").val(loc.street + "  " + loc.adminArea5 + ", " + loc.adminArea3 + " " + loc.postalCode);
+                    $("#address").val(loc.street + "  " + loc.adminArea5 + ", " + loc.adminArea3 + " " + loc.postalCode);
 
+                });
+        })
+        .catch(function (error) {
+            console.log(error);
         });
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
 };
 
-function getLatLongFromAddress()
-{
+function getLatLongFromAddress() {
     fetch("http://www.mapquestapi.com/geocoding/v1/address?key=zeGKwPqmtYulJwF8gftOgbJGVaJaJrWc&location=" + $("#address").val())
-    .then(function (response) {
-        response.json()
-        .then(function (parsedJson)
-        {
-            var loc = parsedJson.results[0].locations[0];
+        .then(function (response) {
+            response.json()
+                .then(function (parsedJson) {
+                    var loc = parsedJson.results[0].locations[0];
 
-            positionForMap = {
-                coords: {
-                    latitude: loc.latLng.lat,
-                    longitude: loc.latLng.lng
-                }
-            };
-            return positionForMap;
+                    positionForMap = {
+                        coords: {
+                            latitude: loc.latLng.lat,
+                            longitude: loc.latLng.lng
+                        }
+                    };
+
+                    if (!map) {
+                        createMap(positionForMap);
+                    }
+                });
+        })
+        .catch(function (error) {
+            console.log(error);
         });
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
 };
