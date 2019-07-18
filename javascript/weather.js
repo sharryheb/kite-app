@@ -12,7 +12,7 @@ var weather = {
 
     //takes a place object and makes an API call for weather data on the object's latitude and longitude, returns a promise to resolve when the data comes back
     getWeather: function (place,time) {
-        const key = '44d4a55b5025e5a21a8ab11202df6b6c';
+        const key = darkSky.key;
         let url = `https://api.darksky.net/forecast/${key}/${place.lat},${place.long},${time}?exclude=flags`;
 
         return $.ajax({
