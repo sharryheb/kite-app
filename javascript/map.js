@@ -62,6 +62,7 @@ function createMap(position) {
           long: venues[i].location.lng
         });
       }
+      weather.topSpots(parks,wind.speedMin,wind.speedMax,requestDateTime);
       createLocationList();
     })
     .catch(function (error) {
