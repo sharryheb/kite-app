@@ -1,5 +1,5 @@
 
-var wind = {speedMax: 0, speedMin: 0, ignoreMaxWindSpeed: false};
+var wind = {speedMax: 20, speedMin: 5, ignoreMaxWindSpeed: false};
 
 var locationProp = {name: '', lat: 0, long: 0, address: ''};
 
