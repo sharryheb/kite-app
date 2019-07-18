@@ -141,20 +141,21 @@ function SetRequestedDate(dateString) {
 
 function createLocationList(parksFinal) {
   $('#locationList').empty();
-  console.log('Listing parks: ' + String(parksFinal))
   if (parksFinal.length)
-  for (var i = 0; i < parksFinal.length; i++) {
-    var listItem = $('<a>');
-    listItem.addClass('collection-item teal-text text-lighten-2');
-    listItem.attr('href', '#!');
-    listItem.html(
-        parksFinal[i].name + '<br>Wind is ' + String(parksFinal[i].speedMin) +
-        '-' + String(parksFinal[i].speedMax) + 'mph');
-    $('#locationList').append(listItem);
-  }
-  else $('#locationList')
-      .html(
-          'We couldn\'t find anywhere windy enough to fly.<br>Try changing your parameters.')
+    for (var i = 0; i < parksFinal.length; i++) {
+      var listItem = $('<a>');
+      listItem.addClass('collection-item teal-text text-lighten-2');
+      listItem.attr('href', '#!');
+      listItem.html(
+          parksFinal[i].name + '<br>Wind is ' + String(parksFinal[i].speedMin) +
+          '-' + String(parksFinal[i].speedMax) + 'mph');
+      $('#locationList').append(listItem);
+    }
+  else
+    $('#locationList')
+        .append($('<div style="margin:2px">').html(
+                        'We couldn\'t find anywhere windy enough to fly.<br>' +
+                        'Try changing your parameters.'));
 }
 
 function roundUpToHalfHour(time) {

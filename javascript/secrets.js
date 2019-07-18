@@ -13,7 +13,7 @@ var gibberish = {
   },
   'darkSky': {
     'key':
-        'U2FsdGVkX1/U5/BFxgyXevioCvyo5+/mttv6bIu3q00JeLb+OqjcsaqfKMcLAIGHVZtRZP0kykBYyiaB42a30w=='
+        'U2FsdGVkX1/Y0qy+yM1bKBgtczuD51LsqdP1tQ0MXF5oP8C2pyvG8yjVNTOK9TSMu3Buw99stfnQQLJniXVB0g=='
   }
 }
 

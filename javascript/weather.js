@@ -16,19 +16,14 @@ var weather = {
     var completedCount = 0;
     for (var i = 0; i < places.length; ++i) {
       const key = getSecret('darkSky', 'key');
-      let url = `https://api.darksky.net/forecast/${key}/${places[i].lat},${
+      places[i].url = `https://api.darksky.net/forecast/${key}/${places[i].lat},${
           places[i].long},${time}?exclude=flags`;
-      places[i].key = places[i].name + String(time);
-      if (this.responses.hasOwnProperty(places[i].key)) {
-        console.log('Already had weather for ' + places[i].key);
+      if (this.responses.hasOwnProperty(places[i].url)) {
         if (++completedCount === places.length) callback(this.responses);
       } else {
-        console.log('Looking up weather for ' + places[i].key);
         var that = this;
-        var responseKey = places[i].key;
-        $.ajax({url: url, method: 'GET'}).then(function(response) {
-          console.log(that);
-          that.responses[responseKey] = response;
+        $.ajax({url: places[i].url, method: 'GET'}).then(function(response) {
+          that.responses[this.url] = response;
           if (++completedCount === places.length) callback(that.responses);
         });
       }
@@ -38,13 +33,12 @@ var weather = {
   // takes an array of place objects, a minimum wind speed, a maximum wind
   // speed, then renders all the places meeting criteria on the map
   topSpots: function(places, min, max, time) {
-    console.log('Getting weather');
+    console.log('Getting Weather');
     this.getWeather(places, time, function(responses) {
-      console.log(places);
-      console.log(responses);
+      console.log('Got Weather');
       let bestPlaces = [];
       for (let i = 0; i < places.length; i++) {
-        let r = responses[places[i].key];
+        let r = responses[places[i].url];
 
         places[i].speedMax = r.currently.windGust;
         places[i].speedMin = r.currently.windSpeed;
