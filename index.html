@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kite Club</title>
-    
+
     <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Architects+Daughter&display=swap" rel="stylesheet">
 
@@ -18,7 +18,8 @@
 
 <body>
     <header id="pageTitle">
-        <h1 id="kiteClub">Kite&nbsp;Club</h1><h4 id="flyAKite">Let's Go Fly a Kite!</h4>
+        <h1 id="kiteClub">Kite&nbsp;Club</h1>
+        <h4 id="flyAKite">Let's Go Fly a Kite!</h4>
     </header>
 
     <div class="container" id="inputScreen">
@@ -26,8 +27,8 @@
             <form class="col s12">
                 <div class="row">
                     <div class="input-field col s7">
-                        <input placeholder="Address" id="address" type="text" data-error="Please enter an address" name="address"
-                            class="validate" required="required" aria-required="true"></input>
+                        <input placeholder="Address" id="address" type="text" data-error="Please enter an address"
+                            name="address" class="validate" required="required" aria-required="true"></input>
                         <label for="address">Where do you want to fly?</label>
                         <span id="validateErrorMsg" class="red-text"></span>
                     </div>
@@ -41,23 +42,25 @@
                 <div class="row">
                     <div class="input-field col s7">
                         <label class="rangeLabel">Min and Max Wind Speed: <span id="curWind"></span></label>
-                        <input class="inputSlider"><div id="windSlider"></div></input>
+                        <input class="inputSlider">
+                        <div id="windSlider"></div></input>
                     </div>
                     <div class="col s1"></div>
                     <div class="input-field col s4">
-                        <input class="inputSlider"><div id="radiusSlider"></div></input>
+                        <input class="inputSlider">
+                        <div id="radiusSlider"></div></input>
                         <label class="rangeLabel">Within this Radius: <span id="curRadius"></span></label>
                     </div>
                 </div>
                 <div class="row" id="ignoreMaxWindLabel">
                     <div class="col s7">
                         <label for="ignoreMaxWind">
-                            <input id="ignoreMaxWind" type="checkbox" class="filled-in"/>
+                            <input id="ignoreMaxWind" type="checkbox" class="filled-in" />
                             <span>Ignore Max Wind Speed</span>
                         </label>
                     </div>
                     <div class="col s5">
-                        
+
                     </div>
                 </div>
 
@@ -73,7 +76,7 @@
     <div class="container hide" id="results">
         <div class="row">
             <div class="col s8">
-                <h4 id="mapResultsTag">You Should Go Here:  </h4>
+                <h4 id="mapResultsTag">You Should Go Here: </h4>
                 <div id="map" class="map"></div>
             </div>
             <div class="col s4">
@@ -81,13 +84,14 @@
                     <h4>List: <a id="redoSearch" class="waves-effect waves-light btn-small right">Start Over</a></h4>
                 </div>
                 <div id="locationList" class="collection">
-                    
+
                 </div>
             </div>
         </div>
     </div>
-    
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="javascript/jquery.datetimepicker.full.min.js"></script>
     <script src="javascript/nouislider.min.js"></script>
 
@@ -98,7 +102,7 @@
     <script type="text/javascript" src="javascript/weather.js"></script>
     <script type="text/javascript" src="javascript/map.js"></script>
     <script type="text/javascript" src="javascript/ui.js"></script>
-    
+
 </body>
 
 </html>
