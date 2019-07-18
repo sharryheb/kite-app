@@ -128,15 +128,35 @@ $(document).ready(function(){
 
 });
 
+$('form').keypress( function( e ) {
+  var code = e.keyCode || e.which;
+
+  if( code === 13 ) {
+    $("#search").click();
+  }
+})
+
 $("#search").click(function()
 {
-    $("#inputScreen").addClass("hide");
-    $("#results").removeClass("hide");
-    if (positionForMap)
+    var inputAddress = $("#address").val();
+    if (inputAddress === "")
     {
-        createMap(positionForMap);
+        $("#address").removeClass("valid");
+        $("#address").addClass("invalid");
+        $("#validateErrorMsg").text("Please enter an address");
     }
-    getLatLongFromAddress($("#address").val());
+    else 
+    {
+        $("#address").addClass("valid");
+        $("#address").removeClass("invalid");
+        $("#inputScreen").addClass("hide");
+        $("#results").removeClass("hide");
+        if (positionForMap)
+        {
+            createMap(positionForMap);
+        }
+        getLatLongFromAddress(inputAddress);
+    }
 });
 
 $("#redoSearch").click(function()
