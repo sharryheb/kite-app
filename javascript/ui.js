@@ -128,6 +128,14 @@ $(document).ready(function(){
 
 });
 
+$('form').keypress( function( e ) {
+  var code = e.keyCode || e.which;
+
+  if( code === 13 ) {
+    $("#search").click();
+  }
+})
+
 $("#search").click(function()
 {
     var inputAddress = $("#address").val();
@@ -135,7 +143,7 @@ $("#search").click(function()
     {
         $("#address").removeClass("valid");
         $("#address").addClass("invalid");
-        $("#validateErrorMsg").text("Please enter an address")
+        $("#validateErrorMsg").text("Please enter an address");
     }
     else 
     {
