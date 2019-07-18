@@ -2,7 +2,6 @@
 var wind = {
     speedMax: 0,
     speedMin: 0,
-    direction: "N",
     ignoreMaxWindSpeed: false
 };
 
@@ -168,14 +167,14 @@ function SetRequestedDate(dateString)
     requestDateTime = Math.round((new Date(dateString)).getTime() / 1000);
 };
 
-function createLocationList()
+function createLocationList(parksFinal)
 {
-    for(var i=0; i<parks.length; i++)
+    for(var i=0; i<parksFinal.length; i++)
     {
         var listItem = $("<a>");
         listItem.addClass("collection-item teal-text text-lighten-2");
         listItem.attr("href", "#!");
-        listItem.text(parks[i].name);
+        listItem.text(parksFinal[i].name);
         $("#locationList").append(listItem);
     }
 }

@@ -12,8 +12,8 @@ var weather = {
 
     //takes a place object and makes an API call for weather data on the object's latitude and longitude, returns a promise to resolve when the data comes back
     getWeather: function (place,time) {
-        const key = '44d4a55b5025e5a21a8ab11202df6b6c';
-        let url = `https://api.darksky.net/forecast/${key}/${place.lat},${place.long},${time}?exclude=flags,minutely,hourly,daily`;
+        const key = darkSky.key;
+        let url = `https://api.darksky.net/forecast/${key}/${place.lat},${place.long},${time}?exclude=flags`;
 
         return $.ajax({
             url:url,
@@ -27,6 +27,7 @@ var weather = {
 
         //make an arrat of promises
         let requests = [];//places.map(this.getWeather);
+        
         for (let i = 0; i < places.length;i++) {
             requests.push(this.getWeather(places[i],time));
         }
@@ -45,7 +46,7 @@ var weather = {
                     p.direction = r.currently.windBearing;
 
                     //add any places within wind criteria to a the bestPlaces array
-                    if(p.speedMax <== max && p.speedMin >== min) {
+                    if((p.speedMax <= max && p.speedMin >= min) || (wind.ignoreMaxWindSpeed && p.speedMin >= min)) {
                         bestPlaces.push(p);
                     }
 
