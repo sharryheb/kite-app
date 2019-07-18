@@ -165,7 +165,6 @@ $("#ignoreMaxWind").click(function()
 function SetRequestedDate(dateString)
 {
     requestDateTime = Math.round((new Date(dateString)).getTime() / 1000);
-    console.log(requestDateTime);
 };
 
 function createLocationList(parksFinal)
