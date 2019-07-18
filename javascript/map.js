@@ -1,4 +1,3 @@
-
 var map;
 var vectorSource;
 var parks = [];
@@ -16,6 +15,7 @@ var iconStyle = new ol.style.Style({
 function createMap(position) {
   // Create the map with given position from geopositioning.
   console.log('Creating Map');
+  console.log(position);
   var lonLat;
   if (position && position.coords) {
     lonLat = [position.coords.longitude, position.coords.latitude];
@@ -46,8 +46,6 @@ function createMap(position) {
     })
   });
 
-
-
   $.ajax({
     url: 'https://api.foursquare.com/v2/venues/search?client_id='
       + fourSquare.clientId + '&client_secret=' + fourSquare.clientSecret +
@@ -64,14 +62,13 @@ function createMap(position) {
           long: venues[i].location.lng
         });
       }
+      createLocationList();
     })
     .catch(function (error) {
       // Code for handling errors
       console.log(error);
     });
 }
-
-
 
 function addMapMarker(lonLat) {
   // Add a marker to the map, takes longitude and latitude as an array.
@@ -89,14 +86,3 @@ function markPlaces(places) {
     addMapMarker([places[i].long, places[i].lat]);
   }
 }
-
-
-
-if ('geolocation' in navigator)
-  navigator.geolocation.getCurrentPosition(createMap, createMap);
-else
-  createMap();
-
-
-
-

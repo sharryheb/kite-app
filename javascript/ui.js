@@ -2,7 +2,8 @@
 var wind = {
     speedMax: 0,
     speedMin: 0,
-    direction: "N"
+    direction: "N",
+    ignoreMaxWindSpeed: false
 };
 
 var locationProp = {
@@ -12,9 +13,16 @@ var locationProp = {
     address: ""
 };
 
-var locationResults = []; 
+var geoLocatedAddress = {
+    street: "",
+    city: "",
+    state: "",
+    zip: ""
+};
 
-var requestRadius = 0;
+var locationResults = [];
+var positionForMap = null;
+var requestRadius = 5;
 
 var nowDateTime = new Date();
 var requestDateTime = null;
@@ -116,13 +124,20 @@ $(document).ready(function(){
         $("#curRadius").text(values[0] + " miles");
     });
 
+    if ('geolocation' in navigator)
+        navigator.geolocation.getCurrentPosition(getAddressFromLatLong);
+
 });
 
 $("#search").click(function()
 {
-    setTimeout( function() { map.updateSize();}, 200);
     $("#inputScreen").addClass("hide");
     $("#results").removeClass("hide");
+    if (positionForMap)
+    {
+        createMap(positionForMap);
+    }
+    getLatLongFromAddress($("#address").val());
 });
 
 $("#redoSearch").click(function()
@@ -130,12 +145,40 @@ $("#redoSearch").click(function()
     setTimeout( function() { map.updateSize();}, 200);
     $("#results").addClass("hide");
     $("#inputScreen").removeClass("hide");
+    $("#map").html("");
+    $("#locationList").html("");
+});
+
+$("#ignoreMaxWind").click(function() 
+{
+    if ($(event.target).attr("checked"))
+    {
+        $("#ignoreMaxWind").attr("checked", false);
+        wind.ignoreMaxWindSpeed = false;
+    }
+    else
+    {
+        $("#ignoreMaxWind").attr("checked", true);
+        wind.ignoreMaxWindSpeed = true;
+    }
 });
 
 function SetRequestedDate(dateString)
 {
     requestDateTime = Math.round((new Date(dateString)).getTime() / 1000);
 };
+
+function createLocationList()
+{
+    for(var i=0; i<parks.length; i++)
+    {
+        var listItem = $("<a>");
+        listItem.addClass("collection-item teal-text text-lighten-2");
+        listItem.attr("href", "#!");
+        listItem.text(parks[i].name);
+        $("#locationList").append(listItem);
+    }
+}
 
 function roundUpToHalfHour(time) {
     var timeToReturn = new Date(time);
@@ -144,4 +187,55 @@ function roundUpToHalfHour(time) {
     timeToReturn.setSeconds(Math.round(timeToReturn.getSeconds() / 60) * 60);
     timeToReturn.setMinutes(Math.round(timeToReturn.getMinutes() / 30) * 30);
     return timeToReturn;
+};
+
+function getAddressFromLatLong(position)
+{
+    if (position && position.coords) {
+        positionForMap = position;
+    }
+    fetch("http://www.mapquestapi.com/geocoding/v1/reverse?key=zeGKwPqmtYulJwF8gftOgbJGVaJaJrWc&location=" + position.coords.latitude + "," + position.coords.longitude)
+    .then(function (response) {
+        response.json()
+        .then(function (parsedJson)
+        {
+            var loc = parsedJson.results[0].locations[0];
+            geoLocatedAddress.street = loc.street;
+            geoLocatedAddress.city = loc.adminArea5;
+            geoLocatedAddress.state = loc.adminArea3;
+            geoLocatedAddress.zip = loc.postalCode;
+
+            $("#address").val(loc.street + "  " + loc.adminArea5 + ", " + loc.adminArea3 + " " + loc.postalCode);
+
+        });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
+function getLatLongFromAddress()
+{
+    fetch("http://www.mapquestapi.com/geocoding/v1/address?key=zeGKwPqmtYulJwF8gftOgbJGVaJaJrWc&location=" + $("#address").val())
+    .then(function (response) {
+        response.json()
+        .then(function (parsedJson)
+        {
+            var loc = parsedJson.results[0].locations[0];
+
+            if (!positionForMap)
+            {
+                positionForMap = {
+                    coords: {
+                        latitude: loc.latLng.lat,
+                        longitude: loc.latLng.lng
+                    }
+                };
+                createMap(positionForMap);
+            }
+        });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 };
