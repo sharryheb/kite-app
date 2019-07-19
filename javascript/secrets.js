@@ -12,7 +12,7 @@ var gibberish = {
         'U2FsdGVkX1/cWNfUxpN+rynC+AySwJPuBFbBMVPfIiU6I5YGViSh67KKgVOaTEKQ'
   },
   'darkSky': {
-    'key': [
+    'keys': [
       'U2FsdGVkX1/e4jc6wAYswuQmXAPcoItcYLJNP2CTbeDzZAcbRYvNGvbjqW/PTWsGA3oC13bFEuzC32hCFshWqQ==',
       'U2FsdGVkX19GPbLK5TnnzX4sKaCCz1QNuwADS7KMBOTWnGEx3+mNzADRyVR+GBQ+/zpImf2xknraO31KaD2c6Q==',
       'U2FsdGVkX18F2XipBMj0ELGcG7CqRHNTmrQwXN8iwZd2H608ABuyrNABmtpLFvSvBUA9/0EfDQjOcYu4iSJ9yA==',
@@ -27,7 +27,7 @@ var gibberish = {
 }
 
 function getSecret(api, secret, i) {
-  if (i) gibberish[api].i = i;
+  if (i !== undefined) gibberish[api].i = i;
   var gibber = gibberish[api][secret];
   if (Array.isArray(gibber)) gibber = gibber[gibberish[api].i];
   return CryptoJS.AES.decrypt(gibber, 'dont.talk.about.kite.club')

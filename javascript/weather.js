@@ -9,24 +9,33 @@ place object format:
 }
 */
 var weather = {
-  responses: {},
+  savedPlaces: {},
   incompleteCount: 0,
 
   callDarkSky: function(place, time, callback, keyIndex) {
-    var key = getSecret('darkSky', 'key', keyIndex);
+    var key = getSecret('darkSky', 'keys', keyIndex);
     var url = `https://api.darksky.net/forecast/${key}/${place.lat},${
         place.long},${time}?exclude=flags`;
     var that = this;
     $.ajax({url: url, method: 'GET'})
         .then(function(response) {
-          that.responses[place.id] = response;
+          let r = response;
+
+          // Store wind data for this place.
+          place.speedMax = r.currently.windGust;
+          place.speedMin = r.currently.windSpeed;
+          place.direction = r.currently.windBearing;
+          // Save the data for this place in the savedPlaces object.
+          that.savedPlaces[place.id] = place;
+          // Decrease incomplete count and call callback if it is 0.
           if (!--that.incompleteCount) callback();
         })
         .catch(function(error) {
           if (error.responseJSON.error === 'daily usage limit exceeded')
+            // This key is used up, so we use the next one.
             that.callDarkSky(
                 place, time, callback,
-                (keyIndex + 1) % gibberish.darkSky.key.length);
+                (keyIndex + 1) % gibberish.darkSky.keys.length);
         });
   },
   // Takes places objects and makes api calls, putting responses in responses
@@ -34,10 +43,15 @@ var weather = {
   getWeather: function(places, time, callback) {
     this.incompleteCount = places.length;
     for (var i = 0; i < places.length; ++i) {
+      // Give this place an ID based on its name and the time.
       places[i].id = places[i].name + String(time);
-      if (this.responses.hasOwnProperty(places[i].id)) {
+      if (this.savedPlaces.hasOwnProperty(places[i].id)) {
+        // We already have this place and time saved with wind data.
+        places[i] = this.savedPlaces[places[i].id];
+        // Decrease incomplete count and call callback if it is 0.
         if (!--this.incompleteCount) callback();
       } else
+        // We don't have data, so we call dark sky to get it.
         this.callDarkSky(places[i], time, callback, gibberish.darkSky.i);
     }
   },
@@ -46,16 +60,10 @@ var weather = {
   // speed, then renders all the places meeting criteria on the map
   topSpots: function(places, min, max, time) {
     console.log('Getting Weather');
-    let that = this;
     this.getWeather(places, time, function() {
       console.log('Got Weather');
       let bestPlaces = [];
       for (let i = 0; i < places.length; i++) {
-        let r = that.responses[places[i].id];
-
-        places[i].speedMax = r.currently.windGust;
-        places[i].speedMin = r.currently.windSpeed;
-        places[i].direction = r.currently.windBearing;
 
         // add any places within wind criteria to a the bestPlaces array
         if ((places[i].speedMax <= max && places[i].speedMin >= min) ||

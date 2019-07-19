@@ -1,6 +1,6 @@
 var map;
 var vectorSource;
-var parks = [];
+var parks = {};
 
 var iconStyle = new ol.style.Style({
   image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
