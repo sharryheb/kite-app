@@ -34,11 +34,12 @@ function createMap(position) {
     view: new ol.View({center: ol.proj.fromLonLat(lonLat), zoom: 12})
   });
 
+  console.log('Finding Parks');
   $.ajax({
      url: 'https://api.foursquare.com/v2/venues/search?client_id=' +
          getSecret('fourSquare', 'clientId') +
          '&client_secret=' + getSecret('fourSquare', 'clientSecret') +
-         '&v=20190715&limit=5&ll=' + String([lonLat[1], lonLat[0]]) +
+         '&v=20190715&limit=17&ll=' + String([lonLat[1], lonLat[0]]) +
          '&radius=' + String(requestRadius * 1609.34) + '&query=park',
      method: 'GET'
    })

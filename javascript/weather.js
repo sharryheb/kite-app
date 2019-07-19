@@ -10,25 +10,35 @@ place object format:
 */
 var weather = {
   responses: {},
+  incompleteCount: 0,
+
+  callDarkSky: function(place, time, callback, keyIndex) {
+    var key = getSecret('darkSky', 'key', keyIndex);
+    var url = `https://api.darksky.net/forecast/${key}/${place.lat},${
+        place.long},${time}?exclude=flags`;
+    var that = this;
+    $.ajax({url: url, method: 'GET'})
+        .then(function(response) {
+          that.responses[place.id] = response;
+          if (!--that.incompleteCount) callback();
+        })
+        .catch(function(error) {
+          if (error.responseJSON.error === 'daily usage limit exceeded')
+            that.callDarkSky(
+                place, time, callback,
+                (keyIndex + 1) % gibberish.darkSky.key.length);
+        });
+  },
   // Takes places objects and makes api calls, putting responses in responses
   // object. Calls callback when responses object is full.
   getWeather: function(places, time, callback) {
-    var completedCount = 0;
+    this.incompleteCount = places.length;
     for (var i = 0; i < places.length; ++i) {
-      const key = getSecret('darkSky', 'key');
-      places[i].url = `https://api.darksky.net/forecast/${key}/${
-          places[i].lat},${places[i].long},${time}?exclude=flags`;
-      if (this.responses.hasOwnProperty(places[i].url)) {
-        if (++completedCount === places.length) callback(this.responses);
-      } else {
-        var that = this;
-        $.ajax({url: places[i].url, method: 'GET'}).then(function(response) {
-          that.responses[this.url] = response;
-          if (++completedCount === places.length) callback(that.responses);
-        }).catch(function(error) {
-          console.log(error);
-        });
-      }
+      places[i].id = places[i].name + String(time);
+      if (this.responses.hasOwnProperty(places[i].id)) {
+        if (!--this.incompleteCount) callback();
+      } else
+        this.callDarkSky(places[i], time, callback, gibberish.darkSky.i);
     }
   },
 
@@ -36,11 +46,12 @@ var weather = {
   // speed, then renders all the places meeting criteria on the map
   topSpots: function(places, min, max, time) {
     console.log('Getting Weather');
-    this.getWeather(places, time, function(responses) {
+    let that = this;
+    this.getWeather(places, time, function() {
       console.log('Got Weather');
       let bestPlaces = [];
       for (let i = 0; i < places.length; i++) {
-        let r = responses[places[i].url];
+        let r = that.responses[places[i].id];
 
         places[i].speedMax = r.currently.windGust;
         places[i].speedMin = r.currently.windSpeed;

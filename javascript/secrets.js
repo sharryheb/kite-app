@@ -26,8 +26,8 @@ var gibberish = {
   }
 }
 
-function getSecret(api, secret, next) {
-  if (next) ++gibberish[api][i];
+function getSecret(api, secret, i) {
+  if (i) gibberish[api].i = i;
   var gibber = gibberish[api][secret];
   if (Array.isArray(gibber)) gibber = gibber[gibberish[api].i];
   return CryptoJS.AES.decrypt(gibber, 'dont.talk.about.kite.club')
