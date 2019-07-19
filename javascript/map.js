@@ -1,6 +1,5 @@
 var map;
 var vectorSource;
-var parks = {};
 
 var iconStyle = new ol.style.Style({
   image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
@@ -39,14 +38,14 @@ function createMap(position) {
      url: 'https://api.foursquare.com/v2/venues/search?client_id=' +
          getSecret('fourSquare', 'clientId') +
          '&client_secret=' + getSecret('fourSquare', 'clientSecret') +
-         '&v=20190715&limit=17&ll=' + String([lonLat[1], lonLat[0]]) +
+         '&v=20190715&limit=3&ll=' + String([lonLat[1], lonLat[0]]) +
          '&radius=' + String(requestRadius * 1609.34) + '&query=park',
      method: 'GET'
    })
       .then(function(response) {
         // Code for handling API response
         var venues = response.response.venues;
-        parks = [];
+        var parks = [];
         for (var i = 0; i < venues.length; ++i) {
           parks.push({
             name: venues[i].name,

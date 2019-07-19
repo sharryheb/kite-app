@@ -12,47 +12,43 @@ var weather = {
   savedPlaces: {},
   incompleteCount: 0,
 
-  callDarkSky: function(place, time, callback, keyIndex) {
+  callDarkSky: function(place, callback, keyIndex) {
     var key = getSecret('darkSky', 'keys', keyIndex);
     var url = `https://api.darksky.net/forecast/${key}/${place.lat},${
-        place.long},${time}?exclude=flags`;
+        place.long}?exclude=flags`;
     var that = this;
     $.ajax({url: url, method: 'GET'})
         .then(function(response) {
-          let r = response;
-
-          // Store wind data for this place.
-          place.speedMax = r.currently.windGust;
-          place.speedMin = r.currently.windSpeed;
-          place.direction = r.currently.windBearing;
+          // Store hourly weather data for this place.
+          place.hourly = response.hourly.data;
+          // Remember when we accessed this data.
+          place.accessTime = new Date().time;
           // Save the data for this place in the savedPlaces object.
-          that.savedPlaces[place.id] = place;
+          that.savedPlaces[place.name] = place;
           // Decrease incomplete count and call callback if it is 0.
           if (!--that.incompleteCount) callback();
         })
         .catch(function(error) {
-          if (error.responseJSON.error === 'daily usage limit exceeded')
+            console.log(error);
             // This key is used up, so we use the next one.
             that.callDarkSky(
-                place, time, callback,
+                place, callback,
                 (keyIndex + 1) % gibberish.darkSky.keys.length);
         });
   },
   // Takes places objects and makes api calls, putting responses in responses
   // object. Calls callback when responses object is full.
-  getWeather: function(places, time, callback) {
+  getWeather: function(places, callback) {
     this.incompleteCount = places.length;
     for (var i = 0; i < places.length; ++i) {
-      // Give this place an ID based on its name and the time.
-      places[i].id = places[i].name + String(time);
-      if (this.savedPlaces.hasOwnProperty(places[i].id)) {
+      if (this.savedPlaces.hasOwnProperty(places[i].name)) {
         // We already have this place and time saved with wind data.
-        places[i] = this.savedPlaces[places[i].id];
+        places[i] = this.savedPlaces[places[i].name];
         // Decrease incomplete count and call callback if it is 0.
         if (!--this.incompleteCount) callback();
       } else
         // We don't have data, so we call dark sky to get it.
-        this.callDarkSky(places[i], time, callback, gibberish.darkSky.i);
+        this.callDarkSky(places[i], callback, gibberish.darkSky.i);
     }
   },
 
@@ -60,22 +56,31 @@ var weather = {
   // speed, then renders all the places meeting criteria on the map
   topSpots: function(places, min, max, time) {
     console.log('Getting Weather');
-    this.getWeather(places, time, function() {
+    this.getWeather(places, function() {
       console.log('Got Weather');
       let bestPlaces = [];
       for (let i = 0; i < places.length; i++) {
-
-        // add any places within wind criteria to a the bestPlaces array
+        // Put current hourly data in speedMax and speedMin
+        // Find the index of the hourly data after the time we want.
+        var j = places[i].hourly.findIndex(e => e.time > time);
+        if (--j < 0) j = 0;
+        console.log(j);
+        console.log(places[i].hourly);
+        var current = places[i].hourly[j];
+        places[i].speedMin = current.windSpeed;
+        places[i].speedMax = current.windGust;
+        places[i].windBearing = current.windBearing;
+        // Add any places within wind criteria to a the bestPlaces array.
         if ((places[i].speedMax <= max && places[i].speedMin >= min) ||
             (wind.ignoreMaxWindSpeed && places[i].speedMin >= min)) {
           bestPlaces.push(places[i]);
         }
       }
-      // sort places such that highest minimum wind speed is first in list
+      // Sort places such that highest minimum wind speed is first in list.
       bestPlaces.sort((a, b) => b.speedMin - a.speedMin);
-      // create map pins for all matching places
+      // Create map pins for all matching places.
       markPlaces(bestPlaces);
-      // call function to populate text list of places
+      // Call function to populate text list of places.
       createLocationList(bestPlaces);
     });
   }
