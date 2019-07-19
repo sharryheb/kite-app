@@ -16,8 +16,8 @@ var weather = {
     var completedCount = 0;
     for (var i = 0; i < places.length; ++i) {
       const key = getSecret('darkSky', 'key');
-      places[i].url = `https://api.darksky.net/forecast/${key}/${places[i].lat},${
-          places[i].long},${time}?exclude=flags`;
+      places[i].url = `https://api.darksky.net/forecast/${key}/${
+          places[i].lat},${places[i].long},${time}?exclude=flags`;
       if (this.responses.hasOwnProperty(places[i].url)) {
         if (++completedCount === places.length) callback(this.responses);
       } else {
@@ -25,6 +25,8 @@ var weather = {
         $.ajax({url: places[i].url, method: 'GET'}).then(function(response) {
           that.responses[this.url] = response;
           if (++completedCount === places.length) callback(that.responses);
+        }).catch(function(error) {
+          console.log(error);
         });
       }
     }

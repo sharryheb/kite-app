@@ -1,36 +1,30 @@
-header
-{
+header {
     background-image: url("../images/header-kite-flying.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position-x: right;
 }
 
-input
-{
+input {
     margin: 0 !important;
 }
 
-label
-{
+label {
     transform: translateY(-16px) scale(1) !important;
 }
 
-.rangeLabel
-{
+.rangeLabel {
     transform: unset !important;
 }
 
-#pageTitle
-{
+#pageTitle {
     display: flex;
     align-items: flex-end;
     margin-bottom: 1rem;
     border-bottom: 1px solid darkslategray;
 }
 
-#kiteClub
-{
+#kiteClub {
     margin: auto;
     margin-top: .8rem;
     margin-left: 2rem;
@@ -39,8 +33,7 @@ label
     font-size: 90px;
 }
 
-#flyAKite
-{
+#flyAKite {
     margin: 0 2rem .5rem auto;
     font-style: italic;
     font-weight: bolder;
@@ -48,33 +41,27 @@ label
     color: darkslategray;
 }
 
-.inputSlider
-{
+.inputSlider {
     border: none !important;
 }
 
-#ignoreMaxWindLabel
-{
+#ignoreMaxWindLabel {
     margin-top: 3rem !important;
 }
 
-#search
-{
+#search {
     margin-top: 1rem;
 }
 
-canvas 
-{
+canvas {
     border: 1px solid black;
 }
 
-#map
-{
+#map {
     height: 70vh;
 }
 
-#locationList
-{
+#locationList {
     height: 70vh;
     border: 1px solid black;
     max-height: 70vh;

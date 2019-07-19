@@ -145,15 +145,23 @@ function createLocationList(parksFinal) {
     for (var i = 0; i < parksFinal.length; i++) {
       var listItem = $('<a>');
       listItem.addClass('collection-item teal-text text-lighten-2');
-      listItem.attr('href', '#!');
+      listItem.attr('data-park', JSON.stringify(parksFinal[i]));
+      listItem.click(function() {
+        var park = JSON.parse($(this).attr('data-park'));
+        console.log(park);
+        map.getView().animate(
+            {center: ol.proj.fromLonLat([park.long, park.lat]), zoom: 13});
+      });
       listItem.html(
-          parksFinal[i].name + '<br>Wind is ' + String(parksFinal[i].speedMin) +
-          '-' + String(parksFinal[i].speedMax) + 'mph');
+          parksFinal[i].name + '<br>Wind will be ' +
+          String(Math.round(parksFinal[i].speedMin)) + '-' +
+          String(Math.round(parksFinal[i].speedMax)) + 'mph');
       $('#locationList').append(listItem);
     }
   else
     $('#locationList')
-        .append($('<div style="margin:2px">').html(
+        .append($('<div style="margin:2px">')
+                    .html(
                         'We couldn\'t find anywhere windy enough to fly.<br>' +
                         'Try changing your parameters.'));
 }
