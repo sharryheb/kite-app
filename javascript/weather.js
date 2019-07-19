@@ -9,61 +9,59 @@ place object format:
 }
 */
 var weather = {
-
-    //takes a place object and makes an API call for weather data on the object's latitude and longitude, returns a promise to resolve when the data comes back
-    getWeather: function (place,time) {
-        const key = darkSky.key;
-        let url = `https://api.darksky.net/forecast/${key}/${place.lat},${place.long},${time}?exclude=flags`;
-
-        return $.ajax({
-            url:url,
-            method:'GET'
+  responses: {},
+  // Takes places objects and makes api calls, putting responses in responses
+  // object. Calls callback when responses object is full.
+  getWeather: function(places, time, callback) {
+    var completedCount = 0;
+    for (var i = 0; i < places.length; ++i) {
+      const key = getSecret('darkSky', 'key');
+      places[i].url = `https://api.darksky.net/forecast/${key}/${
+          places[i].lat},${places[i].long},${time}?exclude=flags`;
+      if (this.responses.hasOwnProperty(places[i].url)) {
+        if (++completedCount === places.length) callback(this.responses);
+      } else {
+        var that = this;
+        $.ajax({url: places[i].url, method: 'GET'}).then(function(response) {
+          that.responses[this.url] = response;
+          if (++completedCount === places.length) callback(that.responses);
+        }).catch(function(error) {
+          console.log(error);
         });
-
-    },
-
-    //takes an array of place objects, a minimum wind speed, a maximum wind speed, then renders all the places meeting criteria on the map
-    topSpots: function(places,min,max,time) {
-
-        //make an arrat of promises
-        let requests = [];//places.map(this.getWeather);
-        
-        for (let i = 0; i < places.length;i++) {
-            requests.push(this.getWeather(places[i],time));
-        }
-
-
-        //once all API calls are back, parse their data into our place objects
-        Promise.all(requests)
-            .then(responses => {
-                let bestPlaces = [];
-                for (let i =0; i < responses.length; i++) {
-                    let p = places[i];
-                    let r = responses[i];
-
-                    p.speedMax = r.currently.windGust;
-                    p.speedMin = r.currently.windSpeed;
-                    p.direction = r.currently.windBearing;
-
-                    //add any places within wind criteria to a the bestPlaces array
-                    if((p.speedMax <= max && p.speedMin >= min) || (wind.ignoreMaxWindSpeed && p.speedMin >= min)) {
-                        bestPlaces.push(p);
-                    }
-
-                    // console.log(p);
-                }
-                
-                //create map pins for all matching places
-                markPlaces(bestPlaces);
-                //TODO: call function to populate text list of places, or do it here
-            });
-
-
+      }
     }
+  },
+
+  // takes an array of place objects, a minimum wind speed, a maximum wind
+  // speed, then renders all the places meeting criteria on the map
+  topSpots: function(places, min, max, time) {
+    console.log('Getting Weather');
+    this.getWeather(places, time, function(responses) {
+      console.log('Got Weather');
+      let bestPlaces = [];
+      for (let i = 0; i < places.length; i++) {
+        let r = responses[places[i].url];
+
+        places[i].speedMax = r.currently.windGust;
+        places[i].speedMin = r.currently.windSpeed;
+        places[i].direction = r.currently.windBearing;
+
+        // add any places within wind criteria to a the bestPlaces array
+        if ((places[i].speedMax <= max && places[i].speedMin >= min) ||
+            (wind.ignoreMaxWindSpeed && places[i].speedMin >= min)) {
+          bestPlaces.push(places[i]);
+        }
+      }
+      // sort places such that highest minimum wind speed is first in list
+      bestPlaces.sort((a, b) => b.speedMin - a.speedMin);
+      // create map pins for all matching places
+      markPlaces(bestPlaces);
+      // call function to populate text list of places
+      createLocationList(bestPlaces);
+    });
+  }
 };
 
 
-// var parks = [{lat:34,long:45,speedMax:null,speedMin:null,direction:null},{lat:29,long:93,speedMax:null,speedMin:null,direction:null}];
-
-
-
+// var parks =
+// [{lat:34,long:45,speedMax:null,speedMin:null,direction:null},{lat:29,long:93,speedMax:null,speedMin:null,direction:null}];
