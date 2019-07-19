@@ -56,8 +56,10 @@ var weather = {
   // speed, then renders all the places meeting criteria on the map
   topSpots: function(places, min, max, time) {
     console.log('Getting Weather');
+    var that = this;
     this.getWeather(places, function() {
       console.log('Got Weather');
+      window.localStorage.setItem('savedPlaces', JSON.stringify(that.savedPlaces));
       let bestPlaces = [];
       for (let i = 0; i < places.length; i++) {
         // Put current hourly data in speedMax and speedMin
@@ -85,6 +87,9 @@ var weather = {
     });
   }
 };
+
+weather.savedPlaces = JSON.parse(localStorage.getItem('savedPlaces'));
+if (!weather.savedPlaces) weather.savedPlaces = {};
 
 
 // var parks =
