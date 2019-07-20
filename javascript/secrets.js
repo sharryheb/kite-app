@@ -12,7 +12,7 @@ var gibberish = {
         'U2FsdGVkX1/cWNfUxpN+rynC+AySwJPuBFbBMVPfIiU6I5YGViSh67KKgVOaTEKQ'
   },
   'darkSky': {
-    'key': [
+    'keys': [
       'U2FsdGVkX1/e4jc6wAYswuQmXAPcoItcYLJNP2CTbeDzZAcbRYvNGvbjqW/PTWsGA3oC13bFEuzC32hCFshWqQ==',
       'U2FsdGVkX19GPbLK5TnnzX4sKaCCz1QNuwADS7KMBOTWnGEx3+mNzADRyVR+GBQ+/zpImf2xknraO31KaD2c6Q==',
       'U2FsdGVkX18F2XipBMj0ELGcG7CqRHNTmrQwXN8iwZd2H608ABuyrNABmtpLFvSvBUA9/0EfDQjOcYu4iSJ9yA==',
@@ -22,12 +22,16 @@ var gibberish = {
       'U2FsdGVkX1+dx43NfoZjHKzpBhj7AbrzgtpmhChe6yAZ9brrOlbgX75phGJKf8HBsUsA4azJYBJJF4k8VEjgxg==',
       'U2FsdGVkX1/4U3MdCrenqXIvjpUx/ZdijmyvRsMcfP+dWjNuGol7l0rtytwNv1oL9CpYsQTtC9UV7VCLTo79Tw=='
     ],
-    i: 7
+    i: 0
   }
-}
+};
+gibberish.darkSky.i = Number(localStorage.getItem('darkSkyi'));
 
-function getSecret(api, secret, next) {
-  if (next) ++gibberish[api][i];
+function getSecret(api, secret, i) {
+  if (i !== undefined) {
+    gibberish[api].i = i;
+    localStorage.setItem(api + 'i', gibberish[api].i);
+  }
   var gibber = gibberish[api][secret];
   if (Array.isArray(gibber)) gibber = gibber[gibberish[api].i];
   return CryptoJS.AES.decrypt(gibber, 'dont.talk.about.kite.club')

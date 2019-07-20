@@ -1,9 +1,20 @@
+html {
+    background: rgb(168, 203, 224);
+    scrollbar-width: none;
+}
+
+.container {
+    background: aliceblue;
+    border: 2px solid lightgray;
+}
+
 header {
     background-image: url("../images/header-kite-flying.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position-x: right;
 }
+
 
 input {
     margin: 0 !important;
@@ -58,12 +69,14 @@ canvas {
 }
 
 #map {
-    height: 70vh;
+    height: 85vh;
 }
 
 #locationList {
-    height: 70vh;
+    height: 85vh;
+    background: #ddd;
     border: 1px solid black;
-    max-height: 70vh;
+    max-height: 90vh;
     overflow: scroll;
+    scrollbar-width: none;
 }
