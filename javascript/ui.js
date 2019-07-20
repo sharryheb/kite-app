@@ -100,6 +100,10 @@ $('form').keypress(function(e) {
   }
 })
 
+$('#address').change(function() {
+  positionForMap = null;
+})
+
 $('#search').click(function() {
   var inputAddress = $('#address').val();
   if (inputAddress === '') {
