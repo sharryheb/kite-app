@@ -22,12 +22,16 @@ var gibberish = {
       'U2FsdGVkX1+dx43NfoZjHKzpBhj7AbrzgtpmhChe6yAZ9brrOlbgX75phGJKf8HBsUsA4azJYBJJF4k8VEjgxg==',
       'U2FsdGVkX1/4U3MdCrenqXIvjpUx/ZdijmyvRsMcfP+dWjNuGol7l0rtytwNv1oL9CpYsQTtC9UV7VCLTo79Tw=='
     ],
-    i: 4
+    i: 0
   }
 }
+gibberish.darkSky.i = Number(localStorage.getItem('darkSkyi'));
 
 function getSecret(api, secret, i) {
-  if (i !== undefined) gibberish[api].i = i;
+  if (i !== undefined) {
+    gibberish[api].i = i;
+    localStorage.setItem(api + 'i', gibberish[api].i);
+  }
   var gibber = gibberish[api][secret];
   if (Array.isArray(gibber)) gibber = gibber[gibberish[api].i];
   return CryptoJS.AES.decrypt(gibber, 'dont.talk.about.kite.club')
