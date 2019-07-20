@@ -40,9 +40,9 @@ $(document).ready(function() {
   noUiSlider.create(windSpeedSlider, {
     start: [5, 20],
     connect: true,
-    range: {'min': 0, 'max': 40},
-    step: 5,
-    pips: {mode: 'steps', density: 5},
+    range: {'min': 0, 'max': 50},
+    step: 1,
+    pips: {mode: 'count', values: 11, density: 2},
 
     format: {
       to: function(value) {
