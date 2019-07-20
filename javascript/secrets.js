@@ -13,15 +13,18 @@ var gibberish = {
   },
   'darkSky': {
     'keys': [
-      'U2FsdGVkX19iqfPFqi8rSGeRuKWtn+YHul8VSIVdM12QLo7P89pM4P2gVBZWp/Wo7LMmjyp1MlY89AyLKmdjeg==',
-      'U2FsdGVkX19iVKG8VTnipVUioWZDtybECtHPuhCYae1W9edc/1pqK3ZfxozLiQWpO08srxMJaFOV2N4vzKb8Fg==',
-      'U2FsdGVkX18R/Xnsjr5847lX50nDRakVB6DGRgMiKtu+MFZnoWp7AScQKWAOG8bLOs1yhWZ3jr5bFt4ymtA5Ww==',
-      'U2FsdGVkX1+xNz4rkcf2C8pWgBdDcVTr3pV5zE0MInl+sLCFShWasgsOQQE2Ezd8daPWOneiS+qC9sw6ERO7xA==',
-      'U2FsdGVkX1/0lqnEXTHc8H4JSiiHqBIQSbRC+qwEKNFzGIx+VxQ0iZa+bPiS+88+hHJ2zFZFasopQ5sLoijV1A==',
-      'U2FsdGVkX19IJwynYAlKZR3mB5idQzeGN38omIs+13KYSRy1bMQS28WAEnmoae9EkDQUIgajBku+9tINzEadHw==',
-      'U2FsdGVkX19EmnfxOnFT7Xd8iY5X+JNkLVTlz/t3qZoJWh7e0vcAWCpkrASGe42MioyDB3HfDPrhafeWHQj5bw==',
-      'U2FsdGVkX18psT2iyqgNhb/sGMTUvVNWh4Mt8A0hNIACrznZOY2E90XvDnkWXkb627FcFAKrpEqXbUrH+X/IBQ==',
-      'U2FsdGVkX19S066Rw5U0YYumluuLhDiwDLJWKPr1G5gN0w7M+LrA0NYLrc7Jpq2b4/roMjZqEPVruHQaNSMsvg=='
+      'U2FsdGVkX18vympKWCbgABjuY3YM5m9HwsQGBwkQKwRBx5rgezLnlGXit+ah6hOHIf9yoVG166NTjNRTyE+T8g==',
+      'U2FsdGVkX19DHosg6dYIoOEYZhdYLPZAJJnws/5etAumcK89Z4vEPS+LGSXld51NVE5JDDCja6oRKEwOlqZh0A==',
+      'U2FsdGVkX183/MFYG+5Y9YTgWMJXTfsBxqKT4zKX/Dlk0TW6aOspLwQaknW1EMYlZxFvT3eyKrSKY8Dt2pZx7Q==',
+      'U2FsdGVkX19PXvYfuEzn6e2h6/C9+vfZ7qEToGN/AQ9Hv4aowXIUrDHV97rvKk576go7LNJrqHiBmQ2qlAfBqQ==',
+      'U2FsdGVkX19VxvY7qbFLWem9n64HdPjW2kj+pVy9td7m02OmUPX/KQ6VQhSxkw51oFhSwDZPuV+T+SlfdE08zw==',
+      'U2FsdGVkX19xzMnu9/fd1qm9dxmgXgQ+lLq/x5Nlri8nqdrBlqxLeoDOH2Dkagj+cWzGp7cDwc3tHNqYcfUSCg==',
+      'U2FsdGVkX1992Ux7b5xxbKIX0yHGhGoUhxaOo5OZZYAwETnsBLf1DbcJnfqXr+FG7eOCrorXTdbPAOnPYpEy5w==',
+      'U2FsdGVkX1+z0hIhG6AKoFgNm8eWHGWlv20C3ZkPWCgJaPVhxKjn2ZJyPTrxzxtXSTwvzw486eisg8RbHkq91A==',
+      'U2FsdGVkX18XJT5gi1dXFNDGUDzFoTr+nLANJ22l3v3ui4/KtbcMCjhuWYJL7g2Q8OJDBAWg0An/WysOPGQPqA==',
+      'U2FsdGVkX19EQhF0L3Z7GNy2fttfR5UAr6mNzMm8Q6IusnAq1WFYJig4UFh25ro3zEm4QZj3Hk8cOqljinXMlw==',
+      'U2FsdGVkX1+y4TsFEMHNuhPy6tihXKRn6UzKFFwawmvxsI8OSRSu7frPiWLjEZtOOjhMtzDTEpFbM7AKcs7hSg==',
+      'U2FsdGVkX1/YtArgvKkZWxjLBsHdAOAhQO658SRCPM9eyKvGJWBzC2i5gpiDmE1TWy6wfHjBWat+vvFSjon1sQ=='
     ],
     i: 0
   }

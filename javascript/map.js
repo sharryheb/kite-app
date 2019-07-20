@@ -48,7 +48,7 @@ function createMap(position) {
         getSecret('fourSquare', 'clientId') +
         '&client_secret=' + getSecret('fourSquare', 'clientSecret') +
         '&v=20190715' +
-        '&limit=13&ll=' + String([lonLat[1], lonLat[0]]) +
+        '&limit=7&ll=' + String([lonLat[1], lonLat[0]]) +
         '&radius=' + String(requestRadius * 1609.34) + '&query=park';
     $.ajax({url: url, method: 'GET'})
         .then(function(response) {
