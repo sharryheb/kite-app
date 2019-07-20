@@ -16,8 +16,9 @@ var weather = {
 
   callDarkSky: function(place, callback, keyIndex) {
     var key = getSecret('darkSky', 'keys', keyIndex);
-    var url = `https://api.darksky.net/forecast/${key}/${place.lat},${
-        place.long}?exclude=flags`;
+    var url =
+        `https://api.darksky.net/forecast/${key}/${place.lat},${place.long}` +
+        '?exclude=currently,minutely,daily,alerts,flags&extend=hourly';
     var that = this;
     console.log('Looking up weather for ' + place.name);
     $.ajax({url: url, method: 'GET'})
@@ -32,7 +33,10 @@ var weather = {
           if (!--that.incompleteCount) callback();
         })
         .catch(function(error) {
-          if (error.responseJSON.error !== 'daily usage limit exceeded')
+          if (error.responseJSON &&
+              error.responseJSON.error === 'daily usage limit exceeded')
+            console.log('usage limit exceeded, next key');
+          else
             console.log(error);
           // This key is used up, so we use the next one.
           that.callDarkSky(

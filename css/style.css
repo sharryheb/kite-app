@@ -69,11 +69,12 @@ canvas {
 }
 
 #map {
-    height: 90vh;
+    height: 85vh;
 }
 
 #locationList {
-    height: 90vh;
+    height: 85vh;
+    background: #ddd;
     border: 1px solid black;
     max-height: 90vh;
     overflow: scroll;
