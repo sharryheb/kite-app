@@ -24,7 +24,7 @@ var gibberish = {
     ],
     i: 0
   }
-}
+};
 gibberish.darkSky.i = Number(localStorage.getItem('darkSkyi'));
 
 function getSecret(api, secret, i) {

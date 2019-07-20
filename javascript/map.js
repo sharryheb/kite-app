@@ -36,7 +36,9 @@ function createMap(position) {
 
   var savedSearches = JSON.parse(localStorage.getItem('savedSearches'));
   if (!savedSearches) savedSearches = {};
-  const searchId = String([Math.round(lonLat[1] * 100), Math.round(lonLat[0] * 100)]) + String(requestRadius);
+  const searchId =
+      String([Math.round(lonLat[1] * 100), Math.round(lonLat[0] * 100)]) +
+      String(requestRadius);
   if (savedSearches.hasOwnProperty(searchId))
     weather.topSpots(
         savedSearches[searchId], wind.speedMin, wind.speedMax, requestDateTime);
@@ -45,7 +47,8 @@ function createMap(position) {
     const url = 'https://api.foursquare.com/v2/venues/search?client_id=' +
         getSecret('fourSquare', 'clientId') +
         '&client_secret=' + getSecret('fourSquare', 'clientSecret') +
-        '&v=20190715' + '&limit=13&ll=' + String([lonLat[1], lonLat[0]]) +
+        '&v=20190715' +
+        '&limit=13&ll=' + String([lonLat[1], lonLat[0]]) +
         '&radius=' + String(requestRadius * 1609.34) + '&query=park';
     $.ajax({url: url, method: 'GET'})
         .then(function(response) {
@@ -60,10 +63,10 @@ function createMap(position) {
             });
           }
           savedSearches[searchId] = parks;
-          window.localStorage.setItem('savedSearches', JSON.stringify(savedSearches));
+          window.localStorage.setItem(
+              'savedSearches', JSON.stringify(savedSearches));
           weather.topSpots(
               parks, wind.speedMin, wind.speedMax, requestDateTime);
-          
         })
         .catch(function(error) {
           // Code for handling errors
