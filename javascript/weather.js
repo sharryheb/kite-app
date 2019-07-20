@@ -18,7 +18,7 @@ var weather = {
     var key = getSecret('darkSky', 'keys', keyIndex);
     var url =
         `https://api.darksky.net/forecast/${key}/${place.lat},${place.long}` +
-        '?exclude=currently,minutely,daily,alerts,flags&extend=hourly';
+        '?exclude=currently,minutely,daily,alerts,flags';
     var that = this;
     console.log('Looking up weather for ' + place.name);
     $.ajax({url: url, method: 'GET'})
