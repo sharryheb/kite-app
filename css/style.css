@@ -1,10 +1,10 @@
-body {
+html {
     background: rgb(168, 203, 224);
+    scrollbar-width: none;
 }
 
 .container {
     background: aliceblue;
-    width: 90%;
     border: 2px solid lightgray;
 }
 
@@ -69,12 +69,13 @@ canvas {
 }
 
 #map {
-    height: 140vh;
+    height: 90vh;
 }
 
 #locationList {
-    height: 140vh;
+    height: 90vh;
     border: 1px solid black;
-    max-height: 140vh;
+    max-height: 90vh;
     overflow: scroll;
+    scrollbar-width: none;
 }

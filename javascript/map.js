@@ -36,17 +36,17 @@ function createMap(position) {
 
   var savedSearches = JSON.parse(localStorage.getItem('savedSearches'));
   if (!savedSearches) savedSearches = {};
-  const params = '&limit=13&ll=' + String([lonLat[1], lonLat[0]]) +
-  '&radius=' + String(requestRadius * 1609.34) + '&query=park';
-  const url = 'https://api.foursquare.com/v2/venues/search?client_id=' +
-      getSecret('fourSquare', 'clientId') +
-      '&client_secret=' + getSecret('fourSquare', 'clientSecret') +
-      '&v=20190715' + params;
-  if (savedSearches.hasOwnProperty(params))
+  const searchId = String([Math.round(lonLat[1] * 100), Math.round(lonLat[0] * 100)]) + String(requestRadius);
+  if (savedSearches.hasOwnProperty(searchId))
     weather.topSpots(
-        savedSearches[params], wind.speedMin, wind.speedMax, requestDateTime);
+        savedSearches[searchId], wind.speedMin, wind.speedMax, requestDateTime);
   else {
     console.log('Finding Parks');
+    const url = 'https://api.foursquare.com/v2/venues/search?client_id=' +
+        getSecret('fourSquare', 'clientId') +
+        '&client_secret=' + getSecret('fourSquare', 'clientSecret') +
+        '&v=20190715' + '&limit=13&ll=' + String([lonLat[1], lonLat[0]]) +
+        '&radius=' + String(requestRadius * 1609.34) + '&query=park';
     $.ajax({url: url, method: 'GET'})
         .then(function(response) {
           // Code for handling API response
@@ -59,7 +59,7 @@ function createMap(position) {
               long: venues[i].location.lng
             });
           }
-          savedSearches[params] = parks;
+          savedSearches[searchId] = parks;
           window.localStorage.setItem('savedSearches', JSON.stringify(savedSearches));
           weather.topSpots(
               parks, wind.speedMin, wind.speedMax, requestDateTime);
