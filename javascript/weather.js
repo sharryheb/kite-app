@@ -26,7 +26,7 @@ var weather = {
           // Store hourly weather data for this place.
           place.hourly = response.hourly.data;
           // Remember when we accessed this data.
-          place.accessTime = new Date().getTime;
+          place.accessTime = new Date().getTime();
           // Save the data for this place in the savedPlaces object.
           that.savedPlaces[place.name] = place;
           // Decrease incomplete count and call callback if it is 0.
