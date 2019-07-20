@@ -185,7 +185,7 @@ function getAddressFromLatLong(position) {
     positionForMap = position;
   }
   fetch(
-      'http://www.mapquestapi.com/geocoding/v1/reverse?key=' +
+      'https://www.mapquestapi.com/geocoding/v1/reverse?key=' +
       getSecret('mapQuest', 'consumerKey') +
       '&location=' + position.coords.latitude + ',' + position.coords.longitude)
       .then(function(response) {
@@ -209,7 +209,7 @@ function getAddressFromLatLong(position) {
 
 function getLatLongFromAddress() {
   fetch(
-      'http://www.mapquestapi.com/geocoding/v1/address?key=' +
+      'https://www.mapquestapi.com/geocoding/v1/address?key=' +
       getSecret('mapQuest', 'consumerKey') + '&location=' + $('#address').val())
       .then(function(response) {
         response.json().then(function(parsedJson) {
