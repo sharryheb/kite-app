@@ -80,3 +80,8 @@ canvas {
     overflow: scroll;
     scrollbar-width: none;
 }
+
+#attributions > * {
+    display: inline-block;
+    width: 30%;
+}

@@ -13,14 +13,15 @@ var gibberish = {
   },
   'darkSky': {
     'keys': [
-      'U2FsdGVkX1/e4jc6wAYswuQmXAPcoItcYLJNP2CTbeDzZAcbRYvNGvbjqW/PTWsGA3oC13bFEuzC32hCFshWqQ==',
-      'U2FsdGVkX19GPbLK5TnnzX4sKaCCz1QNuwADS7KMBOTWnGEx3+mNzADRyVR+GBQ+/zpImf2xknraO31KaD2c6Q==',
-      'U2FsdGVkX18F2XipBMj0ELGcG7CqRHNTmrQwXN8iwZd2H608ABuyrNABmtpLFvSvBUA9/0EfDQjOcYu4iSJ9yA==',
-      'U2FsdGVkX19Q4wj1NF9re0+0N1rCVENXD8TboR8RI5ynQTFPCR24Hl6Ug5EbruZUo/NeiaTal/IUoGAys+r+6g==',
-      'U2FsdGVkX19ZXxkD4I1iDMKPg7LId/6DzmaFOAuV5jN93FX/oA6/Yze6SYk+GvPY9XX16WyuPk6ABVjJwdoY1Q==',
-      'U2FsdGVkX18G8hEKJ6W/8cw51D5ccw/ygW2GmO7zRhC0COD+mzBrJylKi4Ej4zTblAUmB3bSLm7mZZ8FOmJR5g==',
-      'U2FsdGVkX1+dx43NfoZjHKzpBhj7AbrzgtpmhChe6yAZ9brrOlbgX75phGJKf8HBsUsA4azJYBJJF4k8VEjgxg==',
-      'U2FsdGVkX1/4U3MdCrenqXIvjpUx/ZdijmyvRsMcfP+dWjNuGol7l0rtytwNv1oL9CpYsQTtC9UV7VCLTo79Tw=='
+      'U2FsdGVkX19iqfPFqi8rSGeRuKWtn+YHul8VSIVdM12QLo7P89pM4P2gVBZWp/Wo7LMmjyp1MlY89AyLKmdjeg==',
+      'U2FsdGVkX19iVKG8VTnipVUioWZDtybECtHPuhCYae1W9edc/1pqK3ZfxozLiQWpO08srxMJaFOV2N4vzKb8Fg==',
+      'U2FsdGVkX18R/Xnsjr5847lX50nDRakVB6DGRgMiKtu+MFZnoWp7AScQKWAOG8bLOs1yhWZ3jr5bFt4ymtA5Ww==',
+      'U2FsdGVkX1+xNz4rkcf2C8pWgBdDcVTr3pV5zE0MInl+sLCFShWasgsOQQE2Ezd8daPWOneiS+qC9sw6ERO7xA==',
+      'U2FsdGVkX1/0lqnEXTHc8H4JSiiHqBIQSbRC+qwEKNFzGIx+VxQ0iZa+bPiS+88+hHJ2zFZFasopQ5sLoijV1A==',
+      'U2FsdGVkX19IJwynYAlKZR3mB5idQzeGN38omIs+13KYSRy1bMQS28WAEnmoae9EkDQUIgajBku+9tINzEadHw==',
+      'U2FsdGVkX19EmnfxOnFT7Xd8iY5X+JNkLVTlz/t3qZoJWh7e0vcAWCpkrASGe42MioyDB3HfDPrhafeWHQj5bw==',
+      'U2FsdGVkX18psT2iyqgNhb/sGMTUvVNWh4Mt8A0hNIACrznZOY2E90XvDnkWXkb627FcFAKrpEqXbUrH+X/IBQ==',
+      'U2FsdGVkX19S066Rw5U0YYumluuLhDiwDLJWKPr1G5gN0w7M+LrA0NYLrc7Jpq2b4/roMjZqEPVruHQaNSMsvg=='
     ],
     i: 0
   }
