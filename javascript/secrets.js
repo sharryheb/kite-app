@@ -13,23 +13,31 @@ var gibberish = {
   },
   'darkSky': {
     'keys': [
-      'U2FsdGVkX18vympKWCbgABjuY3YM5m9HwsQGBwkQKwRBx5rgezLnlGXit+ah6hOHIf9yoVG166NTjNRTyE+T8g==',
-      'U2FsdGVkX19DHosg6dYIoOEYZhdYLPZAJJnws/5etAumcK89Z4vEPS+LGSXld51NVE5JDDCja6oRKEwOlqZh0A==',
-      'U2FsdGVkX183/MFYG+5Y9YTgWMJXTfsBxqKT4zKX/Dlk0TW6aOspLwQaknW1EMYlZxFvT3eyKrSKY8Dt2pZx7Q==',
-      'U2FsdGVkX19PXvYfuEzn6e2h6/C9+vfZ7qEToGN/AQ9Hv4aowXIUrDHV97rvKk576go7LNJrqHiBmQ2qlAfBqQ==',
-      'U2FsdGVkX19VxvY7qbFLWem9n64HdPjW2kj+pVy9td7m02OmUPX/KQ6VQhSxkw51oFhSwDZPuV+T+SlfdE08zw==',
-      'U2FsdGVkX19xzMnu9/fd1qm9dxmgXgQ+lLq/x5Nlri8nqdrBlqxLeoDOH2Dkagj+cWzGp7cDwc3tHNqYcfUSCg==',
-      'U2FsdGVkX1992Ux7b5xxbKIX0yHGhGoUhxaOo5OZZYAwETnsBLf1DbcJnfqXr+FG7eOCrorXTdbPAOnPYpEy5w==',
-      'U2FsdGVkX1+z0hIhG6AKoFgNm8eWHGWlv20C3ZkPWCgJaPVhxKjn2ZJyPTrxzxtXSTwvzw486eisg8RbHkq91A==',
-      'U2FsdGVkX18XJT5gi1dXFNDGUDzFoTr+nLANJ22l3v3ui4/KtbcMCjhuWYJL7g2Q8OJDBAWg0An/WysOPGQPqA==',
-      'U2FsdGVkX19EQhF0L3Z7GNy2fttfR5UAr6mNzMm8Q6IusnAq1WFYJig4UFh25ro3zEm4QZj3Hk8cOqljinXMlw==',
-      'U2FsdGVkX1+y4TsFEMHNuhPy6tihXKRn6UzKFFwawmvxsI8OSRSu7frPiWLjEZtOOjhMtzDTEpFbM7AKcs7hSg==',
-      'U2FsdGVkX1/YtArgvKkZWxjLBsHdAOAhQO658SRCPM9eyKvGJWBzC2i5gpiDmE1TWy6wfHjBWat+vvFSjon1sQ=='
+      'U2FsdGVkX1/Q3t+g1hn3oO+2+p42Xyv6e/Pgg4vJ92Hh2iep8mYgn5BeN2f0EN9YKr4D17KV04B77juzSFUQ9w==',
+      'U2FsdGVkX1/XKYmDzx7pPvqoj79Lj9biiVeM3o/lJdN3/kpnzvi/h2kLP66n8GJbb30M86XuAWtv0paleQZPRw==',
+      'U2FsdGVkX1+x59PjxUc6oSdkCfhrDxq+8VbZde+Zpv89Nig0KAQnxQonSTHPrKi0JkWblSqIsBGTGpzy52dW6Q==',
+      'U2FsdGVkX18CJ5Ow6sHDHi+rdECbzeVWRTTGcx/MmnFIvLybnovf6ThTwwAnLa2g1mKqrgYHOqnVaORGkUNDPA==',
+      'U2FsdGVkX19D5fNpyMsj2vTgRD1T2IZbYtlv4USSLWz++oDft50aSSfpz4LNpzg2X7TFpoGegORzuzqgbaBfug==',
+      'U2FsdGVkX19AuG17jhyc6sew7XBmf7KpTA1liLa3ZyJ/gFOCeSnbcNjdP7dc4NvogXZ8WYVW8EC6vPOz5phwMA==',
+      'U2FsdGVkX1+G0YYLlyaCawgD9/0VWP8eVnknyK/qNuaWkzlY2EQTdwdAouBWSQojWxLRAjDX6O6fV7evd8ICTg==',
+      'U2FsdGVkX18ZunUieW/79OqRYuj9zHnk22oxgnrt+60sMFuxAD1WS+pTsZunXPmZMH2zue8sToHuScn3ya4ddg==',
+      'U2FsdGVkX1/wR/YsgS6oTQ7Y4zl3IFdwVUOk1yYrrt89qUNSW5Dl3sK+ONUX2APq90FA8lQNJhp8k8Nl13Qgcg==',
+      'U2FsdGVkX198YPJP3sRVvbVJe5/YbitB0kB26hooaT0ipv4RumltDq3PluupDi6N2wrCTTn9lS59vAUdmGMMkA==',
+      'U2FsdGVkX198QkRFvFjGrWgc8lr89TLxjwhzbgTDLuYS4qs5MdboU7FzinKJiAXnyr+sA3HYNabUh3gwqdqgzQ==',
+      'U2FsdGVkX18Vci3ckX1K5BK4st7G8qHQ6SFNHx469udTzXVGz1V0ptcV2uSB+xcIU9kocdvlDBPcV/8NLvpH5A==',
+      'U2FsdGVkX19rmK66UMDniJeIM+XxkSTzc2s+Zmo5iiL8uH8UwS0YQ6nbICu5RecRaoMKrXwZb2fyQS5m2CIHhg=='
+    ],
+    i: 0
+  },
+  'accuWeather': {
+    'keys': [
+      'U2FsdGVkX19bEK8B/96OtjBHqoAblzWKbRzd8zB+5CtyawmUnNmK76n50elFYZEPrwoBLvs+L2GN05iFGwdTFA=='
     ],
     i: 0
   }
 };
 gibberish.darkSky.i = Number(localStorage.getItem('darkSkyi'));
+gibberish.accuWeather.i = Number(localStorage.getItem('accuWeatheri'));
 
 function getSecret(api, secret, i) {
   if (i !== undefined) {
