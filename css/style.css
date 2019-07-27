@@ -1,11 +1,5 @@
 html {
-    background: rgb(168, 203, 224);
     scrollbar-width: none;
-}
-
-.container {
-    background: aliceblue;
-    border: 2px solid lightgray;
 }
 
 header {
