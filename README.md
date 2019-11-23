@@ -14,7 +14,10 @@ See the app here: https://sharryheb.github.io/kite-app/
 7. You will see the parks closest to you that are within the parameters you specified. Click a park in the list to zoom in on the map.
 
 ## Tech Used
-JavaScript/jQuery  
+JavaScript  
+jQuery/jQuery UI  
+axios npm package  
+NoUI Date Time Picker (https://refreshless.com/nouislider/)
 Materialize (UI)  
 DarkSky API  
 FourSquare API  
