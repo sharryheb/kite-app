@@ -15,7 +15,7 @@ See the app here: https://sharryheb.github.io/kite-app/
 
 ## Tech Used
 JavaScript/jQuery  
-Materialize (UI) 
-DarkSky API
-FourSquare API
-OpenStreetMap API
+Materialize (UI)  
+DarkSky API  
+FourSquare API  
+OpenStreetMap API  
